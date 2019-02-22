@@ -14,8 +14,8 @@ public class Simulation {
 
             while(fileScanner.hasNextLine()){
                 Item item = new Item();
-                String readedItem = fileScanner.nextLine();
-                String[] splitItem = readedItem.split("=");
+                String readItem = fileScanner.nextLine();
+                String[] splitItem = readItem.split("=");
                 String itemName=splitItem[0];
                 int itemWeight= Integer.parseInt(splitItem[1]);
 
@@ -34,18 +34,25 @@ public class Simulation {
 
     ArrayList<U1> loadU1(ArrayList<Item> list){
         ArrayList<U1> listOfU1 = new ArrayList<>();
-        int sizeList = list.size();
 
-        for(int i=0; i<sizeList; i++){
+        for(int i=0; i<list.size()-2; i++){
+            int j=i;
+            System.out.println("Creating new U1 Rocket");
             U1 newU1 = new U1();
-            while(newU1.canCarry(list.get(i))){
-                newU1.carry(list.get(i));
+            while(newU1.canCarry(list.get(j))){
+                newU1.carry(list.get(j));
+                System.out.println("Adding "+list.get(j).getName()+" Weight:"+list.get(j).getWeight());
+                if(!newU1.canCarry(list.get(j))){
+                    System.out.println("The Rocket can not carry more items!\n___________________________________");
+                }
+                j++;
             }
             listOfU1.add(newU1);
         }
-
         return listOfU1;
     }
+
+
 
     public ArrayList<U2> loadU2(ArrayList<Item> list){
         ArrayList<U2> listOfU2 = new ArrayList<>();

@@ -30,7 +30,7 @@ public class Rocket implements SpaceShip{
     @Override
     public void carry(Item item) {
 
-        if(this.canCarry(item)){
+        if(canCarry(item)){
             cargo += item.getWeight();
         }
     }
